@@ -45,17 +45,18 @@ class WalletThread(threading.Thread):
         processes -= 1
 
 
+page = 0
+
 try:
-    with open ('./page', 'w') as f:
+    with open ('./page', 'r') as f:
         page = int(f.read().strip())
-except IOError:
-    page = 0
+except IOError: pass
+except ValueError: pass
 
 
 url = 'http://directory.io/'
 status = None
 processes = 0
-
 
 while status != '404':
     page += 1
