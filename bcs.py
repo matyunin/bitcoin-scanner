@@ -9,14 +9,16 @@ import threading
 from cssutils import css
 from BeautifulSoup import BeautifulSoup
 
+
 def signal_handler(signal, frame):
     global page
 
     sys.stdout.write("Finished on page: %d\n" % page)
-
     sys.exit(0)
 
+
 signal.signal(signal.SIGINT, signal_handler)
+
 
 class WalletThread(threading.Thread):
     def __init__(self, url):
@@ -39,7 +41,9 @@ class WalletThread(threading.Thread):
                     wallets_file.write(
                         balance.text + '; ' + self.url + "\n"
                     )
+
         processes -= 1
+
 
 try:
     with open ('./page', 'w') as f:
@@ -47,9 +51,11 @@ try:
 except IOError:
     page = 0
 
+
 url = 'http://directory.io/'
 status = None
 processes = 0
+
 
 while status != '404':
     page += 1
